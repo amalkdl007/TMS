@@ -16,11 +16,11 @@ function App() {
     <div className="App">
       <Navbar/>
       <Routes>
-        <Route exact path= "/" component= {Home}/>
-        <Route exact path= "/about" component= {About}/>
-        <Route exact path= "/contact" component= {Contact}/>
-        <Route exact path= "/login" component= {Login}/>
-        <Route exact path= "/signup" component= {Signup}/>
+        <Route exact path= "/" element= {<Home />}/>
+        <Route exact path= "/about" element= {<About />}/>
+        <Route exact path= "/contact" element= {<Contact />}/>
+        <Route exact path= "/login"element= {<Login />}/>
+        <Route exact path= "/signup" element= {<Signup />}/>
       </Routes>    
     </div>
     </Router>
