@@ -1,0 +1,41 @@
+.container {
+  margin-top: 200px;
+  padding: 0 100px;
+}
+
+.thead {
+  background-color: #1976d2;
+  position: sticky;
+}
+#id {
+  color: white;
+  font-size: large;
+}
+
+#id_name {
+  font-size: 15px;
+  font-weight: bold;
+}
+#id_person {
+  font-size: 14px;
+  font-weight: 500;
+}
+.tablerow {
+  background-color: whitesmoke;
+}
+
+#approve {
+  margin-right: 2px;
+  color: white;
+  border: 1px solid green;
+  background-color: green;
+}
+#reject {
+  margin-right: 2px;
+  color: white;
+  border: 1px solid red;
+  background-color: red;
+}
+.text-pending {
+  color: #1976d2;
+}

@@ -1,0 +1,35 @@
+.avatar {
+  margin-right: 10px;
+}
+#logo-text {
+  display: block;
+  float: right;
+  margin-top: 25px;
+}
+#logo {
+  width: 50px;
+  margin: 10px;
+}
+#linklog {
+  display: block;
+}
+#link {
+  display: inline-block;
+  margin-left: 5px;
+}
+h4 {
+  color: white;
+}
+
+#list {
+  text-decoration: none;
+  color: white;
+  font-size: 16px;
+  padding: 5px;
+  width: 350px;
+}
+#list:hover {
+  background-color: white;
+  color: black;
+  border-radius: 20px;
+}
