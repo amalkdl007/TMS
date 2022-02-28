@@ -1,22 +1,30 @@
 import React from "react";
-const navbar = () => {
-    return (<nav class="navbar navbar-expand-lg navbar-dark  bg-primary">
+
+const navbar = () => {    
+    return (
+    <nav class="navbar navbar-expand-lg navbar-dark  bg-primary">
     <div class="container-fluid">
       {/* <a class="navbar-brand" href="#">Navbar</a> */}
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" >
+
+      <ul class="logo1">
+   <h2 class="logo1"></h2>
+  
+ </ul>
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        {/* <a class="navbar-brand" href="#"><img src="logo.jpg" alt="logo"></img></a> */}
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="/">Home</a>
+            <a class="nav-link " aria-current="page" href="/">Home</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="/about">About</a>
           </li>
-          <li class="nav-item">
+          {/* <li class="nav-item">
             <a class="nav-link" href="/contact">Contact</a>
-          </li>
+          </li> */}
           <li class="nav-item">
             <a class="nav-link" href="/login">Login</a>
           </li>
@@ -39,6 +47,13 @@ const navbar = () => {
        
       </div>
     </div>
+    
+{/* 
+    <div className="top">
+      <div className="topRight">
+      <i class="fa-brands fa-facebook-square"></i>
+      </div>
+    </div> */}
   </nav>
     );
 };
