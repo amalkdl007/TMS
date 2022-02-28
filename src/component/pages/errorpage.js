@@ -1,13 +1,14 @@
 import React from "react";
 
 
-const Login = ()=> {
+const ErrorPage = ()=> {
     return (
         <div className="container">
             <div className="py-4">
-                <h1>Login Page</h1>
+                <h1>ErrorPage not found</h1>
             </div>
-       </div>
+            </div>
+      
     );
 };
-export default Login
+export default ErrorPage
