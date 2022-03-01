@@ -27,7 +27,7 @@ function AdminTable(props) {
   async function fetchAPI(){
     const response=await fetch(`http://localhost:5001/api/enrollments`)
     const body=await response.json()
-    console.log(body.length)
+    console.log(body)
     
     settableContent(body)
     
@@ -36,11 +36,13 @@ function AdminTable(props) {
   }
 
   
+
+  
   return (
     <div className='container'>
     
     <TableContainer component={Paper}  >
-      <Table  sx={{ minWidth: 650 }} size="large" aria-label="a dense table">
+      <Table  sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
         <TableHead >
           <TableRow  className='thead'>
             <TableCell id='id' align="right">Name</TableCell>
@@ -58,10 +60,8 @@ function AdminTable(props) {
         <TableBody>
           {tableContent.length===0?<div className='text-pending'>No pending requests</div>:
           tableContent.map((row) => (
-            <TableRow
-              key={row.name} className='tablerow'
-              sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-            >
+            
+            <TableRow key={row.name} className='tablerow' sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
               
               <TableCell id='id_name' align="right">{row.first_name} {row.last_name}</TableCell>
               <TableCell id='id_person' align="right">{row.email_address}</TableCell>
@@ -79,6 +79,7 @@ function AdminTable(props) {
                       id="demo-simple-select-required"
                       label="Employment *"
                       className='select'
+                      style={{fontSize:'16px'}}
                     >
                       
                       <MenuItem value='internal'>Internal</MenuItem>
@@ -90,7 +91,9 @@ function AdminTable(props) {
               </TableCell>
               <TableCell  id='id_person' align="right">
                 <Button variant="outlined" id='approve'>Approve</Button>
-                <Button variant="outlined" id='reject' >Reject</Button>
+                <Button variant="outlined" id='reject'>Reject</Button>
+                
+            
               </TableCell>
             </TableRow>
           ))}

@@ -1,4 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+
 import Error from './components/error/Error';
 import CreateEnrollment from './components/enrollment/CreateEnrollment';
 import Home from './components/enrollment/Home';
@@ -6,6 +7,7 @@ import Home from './components/enrollment/Home';
 import AdminHome from "./pages/AdminHome";
 import Allocate from './pages/Allocate';
 import ViewAllocations from './pages/ViewAllocations'
+
 
 
 
@@ -23,6 +25,7 @@ function App() {
         <Route path="*" element={<Error />} />
 
         </Routes>
+        
      
     </Router>
   );

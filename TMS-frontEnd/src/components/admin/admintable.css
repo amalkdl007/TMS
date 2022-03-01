@@ -10,14 +10,15 @@
 #id {
   color: white;
   font-size: large;
+  padding: 20px;
 }
 
 #id_name {
-  font-size: 15px;
+  font-size: 16px;
   font-weight: bold;
 }
 #id_person {
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 500;
 }
 .tablerow {
@@ -26,12 +27,15 @@
 
 #approve {
   margin-right: 2px;
+  margin-bottom: 2px;
+  font-size: 16px;
   color: white;
   border: 1px solid green;
   background-color: green;
 }
 #reject {
   margin-right: 2px;
+  font-size: 16px;
   color: white;
   border: 1px solid red;
   background-color: red;
