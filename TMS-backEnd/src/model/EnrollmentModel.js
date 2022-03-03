@@ -20,6 +20,8 @@ var enrollments = new Schema({
     current_company_name : String,
     current_designation : String,
     ictak_course_handling : String,
+    isApproved:Boolean,
+    emptype:String,
     image: {
         data: Buffer,
         contentType: String

@@ -1,8 +1,9 @@
 //email
 
 function approvemail(id){
+  
 
-    trainerData.findOne({"_id":id})
+    enrollment_data.findOne({"_id":id})
       
   
    .then((profile)=>{
@@ -90,4 +91,6 @@ function approvemail(id){
    });
   }
 
-app.listen(port,()=>{console.log("Server ready at "+port);})
+//app.listen(port,()=>{console.log("Server ready at "+port);})
+
+module.exports={approvemail,allocatemail}

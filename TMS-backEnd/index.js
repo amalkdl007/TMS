@@ -2,7 +2,10 @@ const express = require('express');
 const cors = require('cors');
 const enrollment = require('./src/model/EnrollmentModel');
 const enrollmentRouter = require('./src/routes/EnrollmentRoute');
-const path = require('path')
+const adminRouter = require('./src/routes/AdminRoute');
+const path = require('path');
+
+
 
 const app = express();
 app.use(cors());
@@ -14,7 +17,8 @@ app.use(express.json());
 
 
 
-app.use('/api/enrollments',enrollmentRouter); 
+app.use('/api/enrollments',enrollmentRouter);
+app.use('/api/admin',adminRouter) 
 
 
 // app.get('/*',function(req,res){

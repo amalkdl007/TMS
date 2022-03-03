@@ -18,11 +18,20 @@ import Button  from '@mui/material/Button';
 
 function AdminTable(props) {
   const [tableContent, settableContent] = useState([])
+  const [employment,setEmployment]=useState()
+
   
 
   useEffect(()=>{
     fetchAPI();
   },[])
+
+  function handleChange(e){
+    //console.log(e.target.value)
+    setEmployment(e.target.value)
+   
+
+  }
 
   async function fetchAPI(){
     const response=await fetch(`http://localhost:5001/api/enrollments`)
@@ -31,11 +40,44 @@ function AdminTable(props) {
     
     settableContent(body)
     
-    
+  }
+
+  async function approveTrainer(e){
+    const email=(e.target.parentElement).parentElement.cells[1].innerText
+    console.log(email)
+    const response=await fetch(`http://localhost:5001/api/admin/approve`,{
+      method:'put',
+      body:JSON.stringify({email,employment}),
+      headers:{
+        'Content-type':'application/json'
+      }
+      
+
+    })
+    const result=await response.json()
+    console.log(result)
+   
+
+  }
+
+
+  async function deleteData(e){
+    const entry=((((e.target.parentElement).parentElement).firstChild).nextElementSibling).innerText
+    console.log(entry)
+    const response=await fetch(`http://localhost:5001/api/admin/deleteData`,{
+      method:'delete',
+      body:JSON.stringify({entry}),
+      headers:{
+        'Content-type':'application/json'
+      }
+      
+
+    })
+    const result=await response.json()
+    window.location.href='/admin'
     
   }
 
-  
 
   
   return (
@@ -59,7 +101,7 @@ function AdminTable(props) {
         </TableHead>
         <TableBody>
           {tableContent.length===0?<div className='text-pending'>No pending requests</div>:
-          tableContent.map((row) => (
+          tableContent.map((row,key) => (
             
             <TableRow key={row.name} className='tablerow' sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
               
@@ -80,6 +122,7 @@ function AdminTable(props) {
                       label="Employment *"
                       className='select'
                       style={{fontSize:'16px'}}
+                      onChange={handleChange}
                     >
                       
                       <MenuItem value='internal'>Internal</MenuItem>
@@ -90,8 +133,8 @@ function AdminTable(props) {
                   </FormControl>
               </TableCell>
               <TableCell  id='id_person' align="right">
-                <Button variant="outlined" id='approve'>Approve</Button>
-                <Button variant="outlined" id='reject'>Reject</Button>
+                <Button variant="outlined" id='approve' onClick={approveTrainer}>Approve</Button>
+                <Button variant="outlined" id='reject' onClick={deleteData}>Reject</Button>
                 
             
               </TableCell>
