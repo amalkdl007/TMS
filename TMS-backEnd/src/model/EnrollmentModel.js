@@ -15,13 +15,13 @@ var enrollments = new Schema({
     zip_Code: String,
     phone : String,
     email_address : String,
+    password:String,
+    confirmpassword:String,
     highest_qualification : String,
     skill_set : String,
     current_company_name : String,
     current_designation : String,
     ictak_course_handling : String,
-    isApproved:Boolean,
-    emptype:String,
     image: {
         data: Buffer,
         contentType: String

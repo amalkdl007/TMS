@@ -1,13 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
+import Enrollvalidation from './Enrollvalidation';
 import './Enrollment.css';
 
 function CreateEnrollment(props) {
 
     // Storing comments
     const [enrollmentValues, setEnrollmentValues] = useState({  first_name: "",last_name: "",gender: "",date_of_birth: "",
-    address_line_1: "",address_line_2: "",city: "",district: "",state: "",zip_Code: "",phone: "",email_address: "",highest_qualification: "",
+    address_line_1: "",address_line_2: "",city: "",district: "",state: "",zip_Code: "",phone: "",email_address: "",password:"",
+    confirmpassword:"",highest_qualification: "",
     skill_set: "",current_company_name: "",current_designation: "",ictak_course_handling: "",});
+
+    // Manage Form Error Values
+    const [formErrorValues, setFormErrorValues] = useState({});
+
     const navigation = useNavigate()
 
     function handleChange(event) {
@@ -15,11 +21,9 @@ function CreateEnrollment(props) {
         setEnrollmentValues({ ...enrollmentValues, [name]: value })
         
     }
-    /*function handleSelectChange(event) {
-      setEnrollmentValues({genictak_course_handling:event.target.value})
-      //const { name, value } = event.target.value;
-      //setEnrollmentValues({ ...enrollmentValues, [name]: value })
-  }*/
+  
+
+    
 
     async function createEnrollment() {
         const formData = new FormData();
@@ -37,6 +41,8 @@ function CreateEnrollment(props) {
        formData.append("zip_Code", enrollmentValues.zip_Code);
        formData.append("phone", enrollmentValues.phone);
        formData.append("email_address", enrollmentValues.email_address);
+       formData.append("password", enrollmentValues.password);
+       formData.append("confirmpassword", enrollmentValues.confirmpassword);
        formData.append("highest_qualification", enrollmentValues.highest_qualification);
        formData.append("skill_set", enrollmentValues.skill_set);
        formData.append("current_company_name", enrollmentValues.current_company_name);
@@ -60,7 +66,7 @@ function CreateEnrollment(props) {
 
         <>
        <div className="wrapper">
-			<div className="inner">
+			<div className="inner" >
 				<form action="">
 					<h3>Enrollment</h3>
 					<p>Please fill below details to enroll as a trainer</p>
@@ -68,12 +74,14 @@ function CreateEnrollment(props) {
           <label className="form-group">
 						<input type="text" className="form-control"  name="first_name"  value={enrollmentValues.first_name} onChange={handleChange} required/>
 						<span>  First name *</span>
+            <p className='error'>{formErrorValues.first_name}</p>
 						<span className="border"></span>
 					</label>
 
           <label className="form-group">
 						<input type="text" className="form-control"  name="last_name"  value={enrollmentValues.last_name} onChange={handleChange} required/>
 						<span>  Last name *</span>
+            <p className='error'>{formErrorValues.last_name}</p>
 						<span className="border"></span>
 					</label>
 
@@ -136,14 +144,29 @@ function CreateEnrollment(props) {
           <label className="form-group">
 						<input type="phone" className="form-control" value={enrollmentValues.phone} onChange={handleChange} name="phone" required />
 						<span>   Phone *</span>
+            <p className='error'>{formErrorValues.phone}</p>
 						<span className="border"></span>
 					</label>
 
           <label className="form-group">
 						<input type="email" name="email_address" className="form-control"  value={enrollmentValues.email_address} onChange={handleChange} required />
 						<span>   Email address *</span>
+            <p className='error'>{formErrorValues.email_address}</p>
 						<span className="border"></span>
 					</label>
+          <label className="form-group">
+						<input type="password" name="password" className="form-control"  value={enrollmentValues.password} onChange={handleChange} required />
+						<span>  Password*</span>
+            <p className='error'>{formErrorValues.password}</p>
+						<span className="border"></span>
+					</label>
+          <label className="form-group">
+						<input type="password" name="confirmpassword" className="form-control"  value={enrollmentValues.confirmpassword} onChange={handleChange} required />
+						<span> Confirm Password*</span>
+            <p className='error'>{formErrorValues.confirmpassword}</p>
+						<span className="border"></span>
+					</label>
+
 
           <label className="form-group">
 						<input type="text" name="highest_qualification" className="form-control" value={enrollmentValues.highest_qualification} onChange={handleChange} required  />
@@ -179,6 +202,7 @@ function CreateEnrollment(props) {
                 <option value="Cybersecurity">Cybersecurity</option>
               </select>
             	<span> ICTAK Course Handling*</span>
+              <p className='error'>{formErrorValues.ictak_course_handling}</p>
 						<span className="border"></span>
 					</label>
 
@@ -188,8 +212,11 @@ function CreateEnrollment(props) {
         {/* <fieldset> */}
         <label className="form-group">
         <input type="file"  id="imageInput"  className="form-control" name="image" accept=".jpg,.png" required/>
+        
 						<span>    Photo *</span>
+            
             <p>Possible file types: JPG,PNG. Maximum file size: 10 MB.</p>
+            
             <span className="border"></span>
 					</label>
         {/* </fieldset> */}
@@ -197,7 +224,9 @@ function CreateEnrollment(props) {
           
           <button className='alink'  onClick={(e)=>{
             e.preventDefault()
-            createEnrollment()}} 
+            createEnrollment()
+            setFormErrorValues(Enrollvalidation(enrollmentValues));
+            }} 
             value="Submit application" > Submit </button>
         </div>
 				</form>

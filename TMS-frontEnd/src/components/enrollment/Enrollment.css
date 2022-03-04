@@ -1,18 +1,4 @@
-/* .body{
-   
-   justify-content: center;
-    border: solid 3px black;
-    width: 600px;
-    height: 600px;
-    margin-left: 35%;
-    margin-top: 5%;
-}
-.enroll_head{
-    text-align: center;
-    size: 60px;
-    color: brown;
-}
- */
+
 @font-face {
   font-family: "Montserrat-Regular";
   src: url("../fonts/Montserrat/Montserrat-Regular.ttf");
@@ -269,4 +255,9 @@ textarea.form-control {
 
 .course_selection {
   background-color: rgb(57 69 155);
+}
+.error{
+	color:white;
+	text-align: center;
+	height: 0.1px;
 }

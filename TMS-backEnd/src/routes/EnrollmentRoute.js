@@ -21,8 +21,6 @@ var storage = multer.diskStorage({
   
 var upload = multer({ storage: storage });
 
-//get enrollment data onto approval table
-
 enrollmentRouter.get('/',function(req,res){
 
   enrollment_data.find() 
@@ -32,8 +30,20 @@ enrollmentRouter.get('/',function(req,res){
 
   })
 })
-
-//api to enter data into the database
+enrollmentRouter.get('/:id', (req, res) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE");
+  try {
+      const enrollmentId = req.params.id;
+      enrollment_data.findOne({ id: enrollmentId })
+          .then(function (enrollment) {
+              res.status(200).json(enrollment);
+          })
+  }
+  catch (error) {
+      res.status(500).json({ message: 'Error', error });
+  }
+});
 
 enrollmentRouter.post("/",  upload.single('image') ,(req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
@@ -54,6 +64,8 @@ enrollmentRouter.post("/",  upload.single('image') ,(req, res, next) => {
         zip_Code: req.body.zip_Code,
         phone : req.body.phone,
         email_address : req.body.email_address,
+        password:req.body.password,
+        confirmpassword:req.body.confirmpassword,
         highest_qualification : req.body.highest_qualification,
         skill_set : req.body.skill_set,
         current_company_name : req.body.current_company_name,
@@ -74,25 +86,7 @@ enrollmentRouter.post("/",  upload.single('image') ,(req, res, next) => {
   })
   
 });
-/*enrollmentRouter.get('/:id', (req, res) => {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE");
-  try {
-      const enrollmentId = req.params.id;
-      enrollment_data.findOne({ id: enrollmentId })
-          .then(function (enrollment) {
-              res.status(200).json(enrollment);
-          })
-  }
-  catch (error) {
-      res.status(500).json({ message: 'Error', error });
-  }
-});
-*/
 
-
-
-/*
 enrollmentRouter.put("/:id", upload.single('image') , function (req, res) {
   enrollment_data.findByIdAndUpdate(req.params.id, { $set: req.body },  { new: true },function (err, data) {
 
@@ -126,7 +120,6 @@ enrollmentRouter.delete("/", function (req, res) {
   })  
 
 });
-*/
 
 
 module.exports = enrollmentRouter;
