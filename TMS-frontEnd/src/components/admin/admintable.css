@@ -40,3 +40,8 @@
   border: 1px solid red;
   background-color: red;
 }
+.text-pending {
+  color: #1976d2;
+  text-align: left;
+  margin-bottom: 10px;
+}

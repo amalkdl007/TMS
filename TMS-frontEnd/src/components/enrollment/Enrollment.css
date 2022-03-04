@@ -1,4 +1,3 @@
-
 @font-face {
   font-family: "Montserrat-Regular";
   src: url("../fonts/Montserrat/Montserrat-Regular.ttf");
@@ -88,7 +87,7 @@ textarea {
 
 h3 {
   text-transform: uppercase;
-  font-size: 45px;
+  font-size: 35px;
   font-family: "Montserrat-Bold";
   text-align: center;
   margin-bottom: 12px;
@@ -256,8 +255,8 @@ textarea.form-control {
 .course_selection {
   background-color: rgb(57 69 155);
 }
-.error{
-	color:white;
-	text-align: center;
-	height: 0.1px;
+.error {
+  color: white;
+  text-align: center;
+  height: 0.1px;
 }

@@ -38,6 +38,18 @@ function Enrollvalidation(enrollmentValues) {
     if(!enrollmentValues.ictak_course_handling){
         errors.ictak_course_handling = "Select a suitable course";
     }
+    if(!enrollmentValues.highest_qualification){
+        errors.highest_qualification = "Qualification required";
+    }
+    if(!enrollmentValues.skill_set){
+        errors.skill_set = "Enter your skills";
+    }
+    if(!enrollmentValues.current_company_name){
+        errors.current_company_name = "Current work place required";
+    }
+    if(!enrollmentValues.current_designation){
+        errors.current_designation = "Your designation required";
+    }
 
     return errors;
 }

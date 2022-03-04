@@ -16,6 +16,8 @@ import Button  from '@mui/material/Button';
 
 
 
+
+
 function AdminTable(props) {
   const [tableContent, settableContent] = useState([])
   const [employment,setEmployment]=useState()
@@ -37,7 +39,7 @@ function AdminTable(props) {
   async function fetchAPI(){
     const response=await fetch(`http://localhost:5001/api/enrollments`)
     const body=await response.json()
-    console.log(body)
+    //console.log(body)
     
     settableContent(body)
     
@@ -89,8 +91,9 @@ function AdminTable(props) {
 
   
   return (
-    <div className='container'>
     
+    <div className='container'>
+    <p className='text-pending'>{tableContent.length} Pending requests left...</p>
     <TableContainer component={Paper}  >
       <Table  sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
         <TableHead >
@@ -108,7 +111,7 @@ function AdminTable(props) {
           </TableRow>
         </TableHead>
         <TableBody>
-          {tableContent.length===0?<TableRow style={{color:'#1976d2'}}>No pending requests</TableRow>:
+          {tableContent.length===0?<p className='text-pending'>No pending requests</p>:
           tableContent.map((row,key) => (
             
             <TableRow key={row.name} className='tablerow' sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>

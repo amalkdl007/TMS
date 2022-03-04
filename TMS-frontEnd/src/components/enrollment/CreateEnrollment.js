@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from 'react';
+import React, { useState,useEffect} from 'react';
 import { useNavigate } from "react-router-dom";
 import Enrollvalidation from './Enrollvalidation';
 import './Enrollment.css';
@@ -13,6 +13,7 @@ function CreateEnrollment(props) {
 
     // Manage Form Error Values
     const [formErrorValues, setFormErrorValues] = useState({});
+    const [isSubmit,setIsSubmit]=useState(false)
 
     const navigation = useNavigate()
 
@@ -21,6 +22,21 @@ function CreateEnrollment(props) {
         setEnrollmentValues({ ...enrollmentValues, [name]: value })
         
     }
+
+    const handleSubmit=(e)=>{
+      e.preventDefault()
+      setFormErrorValues(Enrollvalidation(enrollmentValues));
+      setIsSubmit(true)
+      }
+
+    useEffect(() => {
+        if (Object.keys(formErrorValues).length === 0 && isSubmit) {
+           createEnrollment();
+           
+        }
+    }, [formErrorValues]);
+
+    
   
 
     
@@ -57,7 +73,7 @@ function CreateEnrollment(props) {
 
         })
         const respBody = await response.json().then (
-            navigation("/admin") );
+            navigation("/") );
             alert(respBody)
             //console.log(respBody)
     }
@@ -67,19 +83,19 @@ function CreateEnrollment(props) {
         <>
        <div className="wrapper">
 			<div className="inner" >
-				<form action="">
+				<form onSubmit={handleSubmit}>
 					<h3>Enrollment</h3>
 					<p>Please fill below details to enroll as a trainer</p>
 
           <label className="form-group">
-						<input type="text" className="form-control"  name="first_name"  value={enrollmentValues.first_name} onChange={handleChange} required/>
+						<input type="text" className="form-control"  name="first_name"  value={enrollmentValues.first_name} onChange={handleChange}/>
 						<span>  First name *</span>
             <p className='error'>{formErrorValues.first_name}</p>
 						<span className="border"></span>
 					</label>
 
           <label className="form-group">
-						<input type="text" className="form-control"  name="last_name"  value={enrollmentValues.last_name} onChange={handleChange} required/>
+						<input type="text" className="form-control"  name="last_name"  value={enrollmentValues.last_name} onChange={handleChange}/>
 						<span>  Last name *</span>
             <p className='error'>{formErrorValues.last_name}</p>
 						<span className="border"></span>
@@ -88,7 +104,8 @@ function CreateEnrollment(props) {
          
          
           <label className="form-group">
-          <select name="gender" className="form-control course_selection" value={enrollmentValues.gender} onChange={handleChange} required>
+          <select name="gender" className="form-control course_selection" defaultValue={''} value={enrollmentValues.gender} onChange={handleChange} >
+                <option value=""></option>
                 <option value="Male">Male</option>
                 <option value="Female">Female</option>
            
@@ -142,26 +159,26 @@ function CreateEnrollment(props) {
 					</label>
 
           <label className="form-group">
-						<input type="phone" className="form-control" value={enrollmentValues.phone} onChange={handleChange} name="phone" required />
+						<input type="phone" className="form-control" value={enrollmentValues.phone} onChange={handleChange} name="phone" />
 						<span>   Phone *</span>
             <p className='error'>{formErrorValues.phone}</p>
 						<span className="border"></span>
 					</label>
 
           <label className="form-group">
-						<input type="email" name="email_address" className="form-control"  value={enrollmentValues.email_address} onChange={handleChange} required />
+						<input type="email" name="email_address" className="form-control"  value={enrollmentValues.email_address} onChange={handleChange}/>
 						<span>   Email address *</span>
             <p className='error'>{formErrorValues.email_address}</p>
 						<span className="border"></span>
 					</label>
           <label className="form-group">
-						<input type="password" name="password" className="form-control"  value={enrollmentValues.password} onChange={handleChange} required />
+						<input type="password" name="password" className="form-control"  value={enrollmentValues.password} onChange={handleChange} />
 						<span>  Password*</span>
             <p className='error'>{formErrorValues.password}</p>
 						<span className="border"></span>
 					</label>
           <label className="form-group">
-						<input type="password" name="confirmpassword" className="form-control"  value={enrollmentValues.confirmpassword} onChange={handleChange} required />
+						<input type="password" name="confirmpassword" className="form-control"  value={enrollmentValues.confirmpassword} onChange={handleChange} />
 						<span> Confirm Password*</span>
             <p className='error'>{formErrorValues.confirmpassword}</p>
 						<span className="border"></span>
@@ -169,33 +186,38 @@ function CreateEnrollment(props) {
 
 
           <label className="form-group">
-						<input type="text" name="highest_qualification" className="form-control" value={enrollmentValues.highest_qualification} onChange={handleChange} required  />
+						<input type="text" name="highest_qualification" className="form-control" value={enrollmentValues.highest_qualification} onChange={handleChange}  />
 						<span>   Highest Qualification *</span>
+            <p className='error'>{formErrorValues.highest_qualification}</p>
 						<span className="border"></span>
 					</label>
 
           <label className="form-group">
-						<input type="text" name="skill_set" className="form-control" value={enrollmentValues.skill_set} onChange={handleChange} required />
+						<input type="text" name="skill_set" className="form-control" value={enrollmentValues.skill_set} onChange={handleChange} />
 						<span>   Skill set *</span>
+            <p className='error'>{formErrorValues.skill_set}</p>
 						<span className="border"></span>
 					</label>
 
 
           <label className="form-group">
-						<input type="text" name="current_company_name"  className="form-control" value={enrollmentValues.current_company_name} onChange={handleChange} required />
+						<input type="text" name="current_company_name"  className="form-control" value={enrollmentValues.current_company_name} onChange={handleChange}  />
 						<span>   Current company Name*</span>
+            <p className='error'>{formErrorValues.current_company_name}</p>
 						<span className="border"></span>
 					</label>
 
 
           <label className="form-group">
-						<input type="text" name="current_designation" className="form-control" value={enrollmentValues.current_designation} onChange={handleChange} required />
+						<input type="text" name="current_designation" className="form-control" value={enrollmentValues.current_designation} onChange={handleChange} />
 						<span>    Current Designation *</span>
+            <p className='error'>{formErrorValues.current_designation}</p>
 						<span className="border"></span>
 					</label>
 
           <label className="form-group">
-          <select name="ictak_course_handling" className="form-control course_selection" value={enrollmentValues.ictak_course_handling} onChange={handleChange} required>
+          <select name="ictak_course_handling" className="form-control course_selection" defaultValue={''} value={enrollmentValues.ictak_course_handling} onChange={handleChange} >
+                <option value=""></option>
                 <option value="FSD">FSD</option>
                 <option value="RPA">RPA</option>
                 <option value="DSA">DSA</option>
@@ -211,7 +233,7 @@ function CreateEnrollment(props) {
          
         {/* <fieldset> */}
         <label className="form-group">
-        <input type="file"  id="imageInput"  className="form-control" name="image" accept=".jpg,.png" required/>
+        <input type="file"  id="imageInput"  className="form-control" name="image" accept=".jpg,.png" required />
         
 						<span>    Photo *</span>
             
@@ -222,12 +244,7 @@ function CreateEnrollment(props) {
         {/* </fieldset> */}
         <div className="btns">
           
-          <button className='alink'  onClick={(e)=>{
-            e.preventDefault()
-            createEnrollment()
-            setFormErrorValues(Enrollvalidation(enrollmentValues));
-            }} 
-            value="Submit application" > Submit </button>
+          <button className='alink' type='submit' value="Submit application"> Submit </button>
         </div>
 				</form>
 			</div>
