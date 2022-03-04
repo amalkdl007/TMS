@@ -58,23 +58,27 @@ function approvemail(id){
 
 // approve
 adminRouter.put('/approve',(req,res)=>{   
-    //console.log(req.body)
-    const email=req.body.email;
-    emptype=req.body.employment;
-    //console.log(emptype);
-
-
-    enrollment_data.findOneAndUpdate({email_address:email},{$set:{
-        isApproved:"true",
-        emptype:emptype
-      }})
-      .then(function(data){
-        //console.log(data)
-        const id=data._id
-        approvemail(id)
-
-        
-      })
+    try {
+      const email=req.body.email;
+      emptype=req.body.employment;
+      
+      enrollment_data.findOneAndUpdate({email_address:email},{$set:{
+          isApproved:"true",
+          emptype:emptype
+        }})
+        .then(function(data){
+          //console.log(data)
+          const id=data._id
+          approvemail(id)
+          res.status(200).json("Email sent")
+        })
+      
+    } catch (error) {
+      console.log(error)
+      res.json('Email not sent.Check again')
+      
+    }
+    
 })
 
 //reject trainer
@@ -92,3 +96,5 @@ adminRouter.delete('/deleteData',function(req,res){
 
 
 module.exports = adminRouter;
+
+//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
