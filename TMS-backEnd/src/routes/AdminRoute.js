@@ -11,35 +11,43 @@ function approvemail(id){
   
     var transporter = nodemailer.createTransport({
       service: 'gmail',
+      host:'smtp.gmail,com',
+      secure:true,
       auth: {
-             user: 'Admin TMS',
+             user: 'tmsa36467@gmail.com',
              pass: 'fsdnorka2021b3'
-         }
+         },
+         tls:{
+             rejectUnauthorized: false
+           }
      })
     
     
     var mailOptions = {
-      from: '	tmsa36467@gmail.com',
+      from: 'tmsa36467@gmail.com',
       to: profile.email_address,
       subject: 'Welcome to ICTAK-'+ profile.first_name,
       html:`<h2>Greetings from ICTAK</h2>
       
-      <p>Hello <b>${profile.first_name}</b> ,your request to join as ICTAK trainer is approved .Login into your profile using below credintials</p>
-      
-      <br><br>
-      <p>ICTAK ID : ${profile._id}</p>  <br><br>
-      <p>Email :${profile.email_address}</p>   <br><br>
-      <p>Password :${profile.password}</p>    <br><br>
-      <p>EmploymentType :${profile.emptype}</p>  <br><br> `
+      <p>Hello <b>${profile.first_name}</b> ,your request to join as ICTAK trainer is approved.
+      Login into your profile using below credintials</p>
+      <ul>
+      <li>ICTAK ID : ${profile._id}</li> 
+      <li>Email :${profile.email_address}</li>  
+      <li>Password :${profile.password}</li>   
+      <li>EmploymentType :${profile.emptype}</li>  
+      </ul>
+      `
   
     };
     
     transporter.sendMail(mailOptions, function(error, info){
       if (error) {
-        console.log(error);
+        res.json('Email not sent.Check again');
+
                       
       } else {       
-  
+        res.json('Email sent');
       }
     });
    
@@ -61,7 +69,7 @@ adminRouter.put('/approve',(req,res)=>{
         emptype:emptype
       }})
       .then(function(data){
-        res.json(data)
+        //console.log(data)
         const id=data._id
         approvemail(id)
 
@@ -78,7 +86,7 @@ adminRouter.delete('/deleteData',function(req,res){
     //console.log(mail)
     enrollment_data.findOneAndDelete({email_address:mail})
     .then(function(){
-      res.status(200).json('entry rejected')
+      res.status(200).json('Entry rejected')
     })
   })
 

@@ -27,8 +27,9 @@ function AdminTable(props) {
   },[])
 
   function handleChange(e){
-    //console.log(e.target.value)
+  
     setEmployment(e.target.value)
+    
    
 
   }
@@ -43,9 +44,13 @@ function AdminTable(props) {
   }
 
   async function approveTrainer(e){
-    const email=(e.target.parentElement).parentElement.cells[1].innerText
-    console.log(email)
-    const response=await fetch(`http://localhost:5001/api/admin/approve`,{
+    const emp=(e.target.parentElement).parentElement.cells[8].innerText
+    //console.log(emp)
+    if(emp==='None'){
+      alert("Enter employment")
+    }else{
+      const email=(e.target.parentElement).parentElement.cells[1].innerText
+      const response=await fetch(`http://localhost:5001/api/admin/approve`,{
       method:'put',
       body:JSON.stringify({email,employment}),
       headers:{
@@ -56,14 +61,16 @@ function AdminTable(props) {
     })
     const result=await response.json()
     console.log(result)
+    }
+    
    
 
   }
 
 
   async function deleteData(e){
-    const entry=((((e.target.parentElement).parentElement).firstChild).nextElementSibling).innerText
-    console.log(entry)
+    const entry=(e.target.parentElement).parentElement.cells[1].innerText
+    //console.log(entry)
     const response=await fetch(`http://localhost:5001/api/admin/deleteData`,{
       method:'delete',
       body:JSON.stringify({entry}),
@@ -74,6 +81,7 @@ function AdminTable(props) {
 
     })
     const result=await response.json()
+    alert(result)
     window.location.href='/admin'
     
   }
@@ -100,7 +108,7 @@ function AdminTable(props) {
           </TableRow>
         </TableHead>
         <TableBody>
-          {tableContent.length===0?<div className='text-pending'>No pending requests</div>:
+          {tableContent.length===0?<TableRow style={{color:'#1976d2'}}>No pending requests</TableRow>:
           tableContent.map((row,key) => (
             
             <TableRow key={row.name} className='tablerow' sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
@@ -122,12 +130,14 @@ function AdminTable(props) {
                       label="Employment *"
                       className='select'
                       style={{fontSize:'16px'}}
+                      defaultValue={'none'}
                       onChange={handleChange}
-                    >
                       
-                      <MenuItem value='internal'>Internal</MenuItem>
-                      <MenuItem value='empanelled'>Empanelled</MenuItem>
-                      <MenuItem value='industry expert'>Industry Expert</MenuItem>
+                    >
+                      <MenuItem value='none'>None</MenuItem>
+                      <MenuItem value='Internal'>Internal</MenuItem>
+                      <MenuItem value='Empanelled'>Empanelled</MenuItem>
+                      <MenuItem value='Industry Expert'>Industry Expert</MenuItem>
                     </Select>
                     
                   </FormControl>
