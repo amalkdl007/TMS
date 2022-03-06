@@ -23,7 +23,7 @@ function Login(setToken) {
         // console.log(event.target);
         const { name, value } = event.target; //destructuring
         setFormValues({ ...formValues, [name]: value });
-        console.log(formValues);
+        // console.log(formValues);
     }
 
     // Form Refresh
@@ -32,7 +32,7 @@ function Login(setToken) {
         let validationErrors = validateLogin(formValues);
         setFormErrorValues(validationErrors);
         if(Object.keys(validationErrors).length === 0)
-            userLogin()
+            userLogin();
     }
 
 
@@ -50,7 +50,7 @@ function Login(setToken) {
         
         if (body.username === username) {
             setToken(body);
-            navigate("/trainer", { replace: true });
+            navigate("/", { replace: true });
         } else {
             alert("Login Unsuccessful!");
         }
@@ -61,7 +61,7 @@ function Login(setToken) {
 
         <div >
             
-                <form onSubmit={handleSubmit} className='Login'>
+                <form className='Login'>
                 <h1 className='head1'>Login</h1> <br/>
                 <input type="email" name='username' placeholder='Enter Username' required="" value={formValues.username} onChange={handleChange} />
                 <br/><br/>
@@ -73,7 +73,7 @@ function Login(setToken) {
                 <br/>
                 <Link to='/signup' className='newSignup'>SignUp</Link>
                 <br/><br/>
-                <Button variant='contained' color='primary'>Submit</Button>
+                <Button onClick={handleSubmit} variant='contained' color='primary'>Submit</Button>
             
                 </form>
             

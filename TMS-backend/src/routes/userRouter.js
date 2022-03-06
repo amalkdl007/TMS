@@ -2,10 +2,11 @@ const express = require("express");
 const accountsRouter = express.Router();
 const UserInfo = require("../models/userModel");
 const jwt = require("jsonwebtoken");
-const cors = require("cors");
-// accountsRouter.use(cors());
+// const cors = require("cors");
 
 accountsRouter.post("/signup", async (req, res) => {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE");
     
     try {
         
@@ -33,8 +34,8 @@ accountsRouter.post("/signup", async (req, res) => {
 })
 
 accountsRouter.post("/login", async (req, res) => {
-    // res.header("Access-Control-Allow-Origin", "*");
-    // res.header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE");
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE");
     const username = req.body.username;
     const password = req.body.password;
     // const adminUser = "admin@gmail.com";

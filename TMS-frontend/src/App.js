@@ -10,25 +10,25 @@ import Trainer from "./component/pages/profile/trainerProfile";
 import Navbar from "./component/layout/navbar";
 import ErrorPage from "./component/pages/errorpage";
 import Footer from "./component/pages/footer";
-// import useToken from "./component/pages/users/useToken"; 
+import useToken from "./component/pages/users/useToken"; 
 import { BrowserRouter as Router, Routes, Route,} from "react-router-dom"; 
 
 function App() {
 
-  // const { token, setToken } = useToken();
+  const { token, setToken } = useToken();
 
-  // if(!token) {
-  //   return (
-  //     <Router>
-  //       <Navbar token={ token }/>
-  //       <Routes>
-  //         <Route path="*" element={<Home />} />
-  //         <Route path="/login" element={<Login setToken={setToken} />} />
-  //         <Route path="/signup" element={<Signup />} />
-  //       </Routes>
-  //     </Router>
-  //   )
-  // }
+  if(!token) {
+    return (
+      <Router>
+        <Navbar token={ token }/>
+        <Routes>
+          <Route path="*" element={<Home />} />
+          <Route path="/login" element={<Login setToken={setToken} />} />
+          <Route path="/signup" element={<Signup />} />
+        </Routes>
+      </Router>
+    )
+  }
   return (
     <>
     
