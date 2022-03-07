@@ -1,25 +1,17 @@
-import React from 'react';
-import Navbar from './component/navbar';
-import Sidebar from './component/sidebar'
-import {BrowserRouter as Router,Routes,Route} from 'react-router-dom';
-// import Home from './component/pages/home';
+// import React from 'react';
+import './App.css';
+// import Navbar from './components/Navbar';
+import {BrowserRouter as Router} from 'react-router-dom';
+import Home from './pages';
 
 function App() {
   return (
    
     
-    <Router>
-      
-      <Sidebar/> 
-      <Navbar/>
-      
-      {/* <Routes>
-        <Route path='/' element={<Home/>}/>
-
-    
-    </Routes> */}
-  
-    </Router>
+    <Router> 
+     
+     <Home/>
+  </Router>
    
   );
 }
